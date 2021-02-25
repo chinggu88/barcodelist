@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:barcodeselector/controller/Barcodelist_controller.dart';
 import 'package:barcodeselector/controller/DBHelper.dart';
@@ -30,8 +31,15 @@ class Barcodelist extends StatelessWidget {
       backgroundColor: Colors.grey,
       body: GetBuilder<Barcodelist_controller>(
         builder: (_) {
-          return _.cardinfo == null
-              ? CircularProgressIndicator()
+          return _.cardinfo.length == 0
+              ? Container(
+                  color: Colors.amber,
+                  child: Center(
+                      child: Text(
+                    "아래 +버튼을 눌러 \n바코드를 \n추가하세요",
+                    style: TextStyle(fontSize: 50, color: Colors.white),
+                  )),
+                )
               : ListView.builder(
                   itemCount: _.cardinfo.length,
                   itemBuilder: (BuildContext context, int i) {
